@@ -3,7 +3,6 @@
 
 int main(int argc, char * argv[])
 {
-    /*TTTTTTTTTTTTTTTTTTTTESSSST*/
     //Initialisation des variables
     int         ** matrice;
     cellule      * lch = NULL, ** prec;
