@@ -1,8 +1,16 @@
 #include "matrice.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 
+/* -------------------------------------------------------------------- */
+/* initialisation_matrice: Alloue l'espace mémoire necéssaire pour une  */
+/*                          matrice                                     */
+/*                                                                      */
+/* En entrée: Un pointeur sur un entier(taille en terme de ligne)       */
+/*            Un pointeur sur un entier (taille en terme de colonne)    */
+/*                                                                      */
+/* En sortie: Un double pointeur sur un entier                          */
+/* -------------------------------------------------------------------- */
 int ** initialisation_matrice(int * taille_ligne, int * taille_colonne)
 {
 
@@ -25,6 +33,14 @@ int ** initialisation_matrice(int * taille_ligne, int * taille_colonne)
 
 }
 
+/* -------------------------------------------------------------------- */
+/* liberer_matrice: Libère l'espace mémoire alloué à la matrice         */
+/*                                                                      */
+/* En entrée: Un double pointeur sur un entier (Sur la matrice)         */
+/*            Un pointeur sur un entier (taille en terme de ligne)      */
+/*                                                                      */
+/* En sortie: Void                                                      */
+/* -------------------------------------------------------------------- */
 void liberer_matrice(int ** matrice, int * taille_ligne)
 {
     int           i;
@@ -37,6 +53,15 @@ void liberer_matrice(int ** matrice, int * taille_ligne)
     free(matrice);
 }
 
+/* -------------------------------------------------------------------- */
+/* afficher_matrice: Affiche la matrice                                 */
+/*                                                                      */
+/* En entrée: Un double pointeur sur un entier (Sur la matrice)         */
+/*            Un pointeur sur un entier (taille en terme de ligne)      */
+/*            Un pointeur sur un entier (taille terme de colonne)       */
+/*                                                                      */
+/* En sortie: Void                                                      */
+/* -------------------------------------------------------------------- */
 void afficher_matrice(int ** matrice, int * taille_ligne, int * taille_colonne)
 {
 
@@ -51,6 +76,15 @@ void afficher_matrice(int ** matrice, int * taille_ligne, int * taille_colonne)
     }
 }
 
+/* -------------------------------------------------------------------- */
+/* creer_matrice: Creer la matrice à partir d'un fichier en paramètre   */
+/*                                                                      */
+/* En entrée: Un pointeur sur un char (Sur le nom du fichier)           */
+/*            Un pointeur sur un entier (taille en terme de ligne)      */
+/*            Un pointeur sur un entier (taille en terme de colonne)    */
+/*                                                                      */
+/* En sortie: Un double pointeur sur un entier (sur la matrice)         */
+/* -------------------------------------------------------------------- */
 int ** creer_matrice(const char * nom_fichier,int * taille_ligne, int * taille_colonne)
 {
     FILE      * fichier_matrice;
