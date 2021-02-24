@@ -16,14 +16,14 @@ typedef struct cellule
 }cellule;
 
 //Prototypes des fonctions sur les listes chaînées
-cellule * alloc_cellule(int valeur,int periode, int num_usine,cellule * suivant);
-cellule * initialisation_lch(int valeur, int num_usine);
-void ajouter_cellule(cellule ** prec, cellule * block);
-void supprimer_cellule(cellule ** prec);
-cellule ** recherche_prec_triee(cellule ** tete, int valeur);
-cellule ** recherche_prec(cellule ** tete, int valeur);
-void afficher_lch(cellule * tete, FILE * flux);
-void liberer_lch(cellule ** tete);
-void supprimer_occurence(cellule ** tete, int num_usine);
-void sauvegarder_liste(cellule * tete, const char * nom_fichier);
+cellule * alloc_cellule(int, int, int, cellule *);
+void ajouter_cellule(cellule ** , cellule *);
+void supprimer_cellule(cellule **);
+cellule ** recherche_prec_triee(cellule **, int);
+cellule ** recherche_prec(cellule **, int);
+void afficher_lch(cellule *, FILE *);
+void liberer_lch(cellule **);
+void supprimer_occurence(cellule **, int);
+void sauvegarder_liste(cellule *, const char *);
+
 #endif
