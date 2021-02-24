@@ -40,9 +40,9 @@ void ajouter_cellule(cellule ** prec, cellule * block)
 
 void supprimer_cellule(cellule ** prec)
 {
-     cellule * temp = *prec;
+    cellule * temp = *prec;
     *prec=(*prec)->suivant;
-     free(temp);
+    free(temp);
 }
 
 cellule ** recherche_prec_triee(cellule ** tete, int valeur)
@@ -88,8 +88,12 @@ void afficher_lch(cellule * tete)
 
 }
 
-//TODO
-/*void liberer_lch(cellule ** tete)
-{
 
-}*/
+void liberer_lch(cellule ** tete)
+{
+    while(*tete)
+    {
+        supprimer_cellule(tete);
+    }
+
+}

@@ -53,8 +53,12 @@ int main(int argc, char * argv[])
         afficher_lch(lch);
 
         //Et on libère l'espace mémoire alloué à la matrice en fin de traitement, en vérifiant que l'allocation de la matrice ai marchée
-        if(matrice!=NULL)
+        if(matrice)
             liberer_matrice(matrice, p_taille_ligne);
+        
+        //En fin de traitement on libère la liste chaînée
+        if(lch)
+            liberer_lch(&lch);
 
     }
     else
