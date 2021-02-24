@@ -94,16 +94,16 @@ int ** creer_matrice(const char * nom_fichier,int * taille_ligne, int * taille_c
     if((fichier_matrice = fopen(nom_fichier, "r")) != NULL)
     {
 
-        //On récupère les dimensions de la matrice sur la première ligne
-            //L'énoncé stipule que le fichier est correct => pas de vérification supplémentaire
+//On récupère les dimensions de la matrice sur la première ligne
+//L'énoncé stipule que le fichier est correct => pas de vérification supplémentaire
         fscanf(fichier_matrice,"%d %d", taille_ligne, taille_colonne);
 
-        //On alloue de la mémoire pour la matrice
+//On alloue de la mémoire pour la matrice
         matrice = initialisation_matrice(taille_ligne, taille_colonne);
-        //On vérifie que l'allocation se soit bien passée
+//On vérifie que l'allocation se soit bien passée
         if(matrice != NULL)
         {
-            //On récupère dans la suite du fichier les éléments matrice(i,j)
+//On récupère dans la suite du fichier les éléments matrice(i,j)
             for(i = 0; i < *(taille_ligne);++i)
             {
                 for(j = 0; j < *(taille_colonne);++j)
@@ -117,7 +117,7 @@ int ** creer_matrice(const char * nom_fichier,int * taille_ligne, int * taille_c
             fprintf(stdout, "Erreur : Allocation mémoire pour la matrice impossible !\n");
         }
 
-        //On libère le pointeur sur le fichier matrice en fin de traitement
+//On libère le pointeur sur le fichier matrice en fin de traitement
         fclose(fichier_matrice);
     }
     else

@@ -146,13 +146,13 @@ void liberer_lch(cellule ** tete)
 /* -------------------------------------------------------------------- */
 void supprimer_occurence(cellule ** tete, int num_usine)
 {
-    /*Version pas optimale, car on repart à chaque fois du début*/
-    /*cellule ** prec = NULL;
-    while((prec = recherche_prec(tete,num_usine)) && *prec)
-    {
-        supprimer_cellule(prec);
-    }
-    */
+/*Version pas optimale, car on repart à chaque fois du début*/
+/*cellule ** prec = NULL;
+while((prec = recherche_prec(tete,num_usine)) && *prec)
+{
+    supprimer_cellule(prec);
+}
+*/
     
     cellule ** prec = tete;
 
