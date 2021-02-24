@@ -74,20 +74,19 @@ cellule ** recherche_prec(cellule ** tete, int valeur)
 
 }
 
-void afficher_lch(cellule * tete)
+void afficher_lch(cellule * tete, FILE * flux)
 {
     cellule * courant = tete;
 
     while(courant)
     {
-        fprintf(stdout, "%d ", courant->valeur);
+        fprintf(flux, "%d ", courant->valeur);
         courant = courant->suivant;
     }
 
-    fprintf(stdout, "\n");
+    fprintf(flux, "\n");
 
 }
-
 
 void liberer_lch(cellule ** tete)
 {
@@ -96,4 +95,27 @@ void liberer_lch(cellule ** tete)
         supprimer_cellule(tete);
     }
 
+}
+
+void supprimer_occurence(cellule ** tete, int num_usine)
+{
+    cellule ** prec = NULL;
+    while((prec = recherche_prec(tete,num_usine)) && *prec)
+    {
+        supprimer_cellule(prec);
+    }
+}
+
+void sauvegarder_liste(cellule * tete, const char * nom_fichier)
+{
+    FILE * fichier;
+
+    if((fichier = fopen(nom_fichier, "w+")))
+    {
+        afficher_lch(tete,fichier);
+        fclose(fichier);
+    }else{
+        fprintf(stdout, "Erreur : Impossible de sauvegarder la liste chaine dans un fichier !");
+    }
+    
 }

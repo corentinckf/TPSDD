@@ -50,7 +50,15 @@ int main(int argc, char * argv[])
         }
 
         printf("\n");
-        afficher_lch(lch);
+        //Affichage de la liste chaînée avant suppression des occurences
+        afficher_lch(lch,stdout);
+
+        //Suppression des coûts de l'usine 0
+        supprimer_occurence(&lch,0);
+        //Affichage de la liste chaînée après suppression des occurences
+        afficher_lch(lch,stdout);
+        //On sauvegarde la liste dans un fichier
+        sauvegarder_liste(lch,"sauvegarde.txt");
 
         //Et on libère l'espace mémoire alloué à la matrice en fin de traitement, en vérifiant que l'allocation de la matrice ai marchée
         if(matrice)
