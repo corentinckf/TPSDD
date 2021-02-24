@@ -151,16 +151,17 @@ void supprimer_occurence(cellule ** tete, int num_usine)
 while((prec = recherche_prec(tete,num_usine)) && *prec)
 {
     supprimer_cellule(prec);
-}
-*/
-    
+}*/
+
+/*Version plus optimale, on part de la tête au début*/
     cellule ** prec = tete;
 
-    while (*prec)
+/*à chaque appel de recherche_prec, on repart au prec trouvé avant
+S'il n'existe pas, pas de soucis, on sort du while                */
+    while (*(prec = recherche_prec(prec,num_usine)))
     {
-        prec = recherche_prec(prec,num_usine);
         supprimer_cellule(prec);
-    }   
+    }
 
 }
 
