@@ -14,10 +14,10 @@ int main(int argc, char * argv[])
     {
 
         matrice = creer_matrice(argv[1], p_taille_ligne, p_taille_colonne);
-        //On affiche sur la sortie standard la matrice, pour vérifier que ça marche
+    //On affiche sur la sortie standard la matrice, pour vérifier que ça marche
         afficher_matrice(matrice, p_taille_ligne, p_taille_colonne);
         prec = &lch;
-        //On crée la liste chaînée à partir de la matrice
+    //On crée la liste chaînée à partir de la matrice
         for(i = 0; i < taille_ligne;++i)
         {
             for(j = 0; j < taille_colonne;++j)
@@ -50,21 +50,21 @@ int main(int argc, char * argv[])
         }
 
         printf("\n");
-        //Affichage de la liste chaînée avant suppression des occurences
+    //Affichage de la liste chaînée avant suppression des occurences
         afficher_lch(lch,stdout);
 
-        //Suppression des coûts de l'usine 0
+    //Suppression des coûts de l'usine 0
         supprimer_occurence(&lch,0);
-        //Affichage de la liste chaînée après suppression des occurences
+    //Affichage de la liste chaînée après suppression des occurences
         afficher_lch(lch,stdout);
-        //On sauvegarde la liste dans un fichier
+    //On sauvegarde la liste dans un fichier
         sauvegarder_liste(lch,"sauvegarde.txt");
 
-        //Et on libère l'espace mémoire alloué à la matrice en fin de traitement, en vérifiant que l'allocation de la matrice ai marchée
+    //Et on libère l'espace mémoire alloué à la matrice en fin de traitement, en vérifiant que l'allocation de la matrice ai marchée
         if(matrice)
             liberer_matrice(matrice, p_taille_ligne);
         
-        //En fin de traitement on libère la liste chaînée
+    //En fin de traitement on libère la liste chaînée
         if(lch)
             liberer_lch(&lch);
 
