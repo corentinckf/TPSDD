@@ -77,7 +77,7 @@ void afficher_matrice(int ** matrice, int * taille_ligne, int * taille_colonne)
 }
 
 /* -------------------------------------------------------------------- */
-/* creer_matrice: Creer la matrice à partir d'un fichier en paramètre   */
+/* creer_matrice: Crée la matrice à partir d'un fichier en paramètre    */
 /*                                                                      */
 /* En entrée: Un pointeur sur un char (Sur le nom du fichier)           */
 /*            Un pointeur sur un entier (taille en terme de ligne)      */
