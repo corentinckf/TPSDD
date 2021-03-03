@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define FORMAT %d
+
 //Définition des structures nécessaires à la gestion de la pile
 typedef int element_t;
 typedef struct pile

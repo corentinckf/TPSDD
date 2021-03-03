@@ -57,12 +57,12 @@ void sommet(pile_t * pile, element_t * resultat, int * retour)
 int empiler(pile_t * pile, element_t element)
 {
     int retour = 1;
-    if(!estVide(pile))
+    if(!estPleine(pile))
     {
 //Incrémentation du sommet
         ++(pile->sommet);
 //Ajout de l'élement à la pile
-        (pile->base)[pile->sommet + 1] = element;
+        (pile->base)[pile->sommet] = element;
         retour = 0;
     }
 
@@ -78,6 +78,6 @@ void depiler(pile_t * pile, element_t * resultat, int * retour)
         *resultat = (pile->base)[pile->sommet];
 //Décremente le sommet, car un élement en moins
         --pile->sommet;
-        retour = 0;
+        *retour = 0;
     }
 }
