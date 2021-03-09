@@ -8,13 +8,19 @@ int main(int argc, char * argv[])
     cellule      * lch = NULL, ** prec;
     int            i = 0, j = 0,taille_ligne = 0, taille_colonne = 0, num_element = 0;
     int          * p_taille_colonne = &taille_colonne, * p_taille_ligne = &taille_ligne;
-    int            k = atoi(argv[2]), u;
+    int            k, u;
 //On procède au traitement uniquement si K et le nom du fichier sont donnés
     if(argc >=3)
     {
-
+        k = atoi(argv[2]);
+        if(k < 0)
+        {
+            fprintf(stdout, "K doit-être au moins égal à 0 !\n");
+            exit(0);
+        }
         matrice = creer_matrice(argv[1], p_taille_ligne, p_taille_colonne);
 //On affiche sur la sortie standard la matrice, pour vérifier que ça marche
+        fprintf(stdout, "Matrice :\n");
         afficher_matrice(matrice, p_taille_ligne, p_taille_colonne);
         prec = &lch;
 //On crée la liste chaînée à partir de la matrice
@@ -51,12 +57,27 @@ int main(int argc, char * argv[])
 
         printf("\n");
 //Affichage de la liste chaînée avant suppression des occurences
+        fprintf(stdout, "Liste chaînée avant suppression :\n");
         afficher_lch(lch,stdout);
 
 //Suppression des coûts de l'usine u (que si u est donné en argument)
-        if((u = atoi(argv[3])) >= 0)
-            supprimer_occurence(&lch,u);
+        if(argc >= 4 && argv[3])
+        {
+            u = atoi(argv[3]);
+
+            if(u >= 0 && u <= taille_ligne)
+            {
+                supprimer_occurence(&lch,u);
+            }
+            else{
+                fprintf(stdout, "Le numéro d'usine ne peut-être négatif ou supérieur au nombre d'usine !\n");
+                exit(0);
+            }
+        } 
+
+            
 //Affichage de la liste chaînée après suppression des occurences
+        fprintf(stdout, "Liste chaînée après suppression :\n");
         afficher_lch(lch,stdout);
 //On sauvegarde la liste dans un fichier
         sauvegarder_liste(lch,"sauvegarde.txt");
