@@ -12,7 +12,7 @@ pile_t * initialiser_Pile(int taille_pile)
         pile->base = (element_t *) malloc(taille_pile * sizeof(element_t));
 
 //Si l'allocation échoue
-        if(pile->base)
+        if(pile->base == NULL)
         {
             free(pile);
             pile = NULL;
