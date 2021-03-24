@@ -3,6 +3,7 @@
 
 #define MAX 100000
 
+/*Définition récursive de la fonction CNP*/
 int CNP(int n, int p)
 {
     int retour;
@@ -13,47 +14,7 @@ int CNP(int n, int p)
     return retour;
 }
 
-int AckIter(int m, int n)
-{
-    pile_t * pile = initialiser_Pile(MAX);
-    element_t mi = m, *pmi = &mi;
-    element_t ni = n, *pni = &ni;
-    int etat = 0, * petat = &etat;
-    int fin = 0;
-    while (!fin)
-    {
-        if(mi)
-        {
-            while (ni)
-            {
-                empiler(pile,mi);
-                --ni;
-            }
-            --mi;
-            ni = 1;
-            
-        }
-        else
-        {
-            ++ni;
-            if(!estVide(pile))
-            {
-                depiler(pile, pmi, petat);
-                --mi;
-            }
-            else
-            {
-                fin = 1;
-            }
-        }
-    }
-    liberer_Pile(&pile);
-    return ni;
-    
-}
-
-
-
+/*Traduction itérative de la fonction CNP*/
 int CNP_IT(int n, int p)
 {
     pile_t * pile = initialiser_Pile(MAX);
@@ -93,7 +54,5 @@ int main()
 {
     printf("CNP(%d,%d) récursif = %d\n",5,3, CNP(5,3));
     printf("CNP(%d,%d) itératif = %d\n",5,3,CNP_IT(5,3));
-    printf("Ackerman(2,1) : %d\n", AckIter(2,1));
-
     return 0;
 }
