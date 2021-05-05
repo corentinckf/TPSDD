@@ -10,6 +10,6 @@ typedef struct noeud {
     struct noeud * frere;
 } noeud_t;
 
-noeud * alloc_noeud(char valeur,noeud * fils, noeud * frere);
+noeud_t * alloc_noeud(char valeur,noeud_t * fils, noeud_t * frere);
 
 #endif

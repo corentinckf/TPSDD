@@ -6,9 +6,10 @@
 #include "arbre.h"
 
 #define FORMAT %d
+#define MAX 1000
 
 //Définition des structures nécessaires à la gestion de la pile
-typedef noeud element_t;
+typedef noeud_t element_t;
 typedef struct pile
 {
 
