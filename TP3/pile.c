@@ -124,7 +124,7 @@ int empiler(pile_t * pile, element_t element)
 /*                                                                                    */
 /* En sortie: void                                                                    */
 /* -----------------------------------------------------------------------------------*/
-void depiler(pile_t * pile, element_t * resultat, int * retour)
+void depiler(pile_t * pile, element_t *resultat, int * retour)
 {
     *retour = 1;
     if(!estVide(pile))

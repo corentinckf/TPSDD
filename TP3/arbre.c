@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-noeud * alloc_noeud(char valeur,noeud * fils, noeud * frere)
+noeud_t * alloc_noeud(char valeur,noeud_t * fils, noeud_t * frere)
 {
-    noeud * element = (noeud *) malloc(sizeof(cellule));
+    noeud_t * element = (noeud_t *) malloc(sizeof(noeud_t));
     if(element)
     {
         element->valeur = valeur;
