@@ -3,11 +3,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "arbre.h"
 
 #define FORMAT %d
 
 //Définition des structures nécessaires à la gestion de la pile
-typedef int element_t;
+typedef noeud element_t;
 typedef struct pile
 {
 
