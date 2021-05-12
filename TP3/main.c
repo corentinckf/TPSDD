@@ -1,6 +1,7 @@
 #include "pile.h"
 #include "arbre.h"
 #include "string.h"
+#include <ctype.h>
 
 noeud_t * creer_Dico(char * string)
 {
@@ -44,15 +45,42 @@ noeud_t * creer_Dico(char * string)
                 break;     
         }
     }
-
+    liberer_Pile(&pile);
     return rac;
 }
 
 
-void affichage_Dico(noeud_t * racine)
+
+void disp_Mots(noeud_t * racine)
 {
     pile_t * pile = initialiser_Pile(MAX);
-    noeud_t ** prec = &racine, * cour = racine;
+    noeud_t * cour = racine, * copie[MAX];
+    int etat = 0;
+
+    while(cour || ! estVide(pile))
+    {
+        while(cour)
+        {
+            empiler(pile, cour);
+            if(isupper(cour->valeur)) //Si lettre maj, on a un mot
+            {
+                //Faire une fonction
+                for(int i = 0; i <= pile->sommet;++i)
+                    copie[i] = pile->base[i];
+                //Faire une fonction
+                for(int i = 0; i <= pile->sommet;++i)
+                    printf("%c", copie[i]->valeur);
+                printf("\n");
+            }   
+            cour = cour->fils;
+        }
+        while(cour == NULL && !estVide(pile))
+            depiler(pile, &cour, &etat);
+        if(cour)
+            cour = cour->frere;
+        
+    }
+    liberer_Pile(&pile);
 
 
 }
@@ -62,6 +90,8 @@ int main()
     char expression[] = "(a*(a*(C+D)+b*E))";
 
     noeud_t * rac = creer_Dico(expression);
+
+    disp_Mots(rac);
 
     return 0;
 }
