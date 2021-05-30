@@ -18,10 +18,32 @@ noeud_t * alloc_noeud(char valeur,noeud_t * fils, noeud_t * frere)
 
 void liberer_Arbre(noeud_t ** racine)
 {
-    while(*racine)
+    pile_t * pile = initialiser_Pile(MAX);
+    noeud_t ** prec = racine;
+    noeud_t * cour = *racine;
+    int etat = 0;
+
+    while(cour || !estVide(pile))
     {
-        supprimer_noeud(racine);
+        while(cour)
+        {
+            empiler(pile, cour);
+            cour = cour->fils;
+        }
+        while(cour == NULL && !estVide(pile))
+        {
+            depiler(pile,&cour,&etat);
+        }
+        if(cour)
+        {
+            prec = &cour;
+            cour = cour->frere;
+            free(prec);
+        }
     }
+
+    liberer_Pile(&pile);
+
 }
 
 void supprimer_noeud(noeud_t ** prec)
@@ -118,7 +140,7 @@ noeud_t ** recherche_prec_triee(noeud_t ** tete, char valeur)
 {
     noeud_t ** prec = tete;
     noeud_t  * courant = *tete;
-    while (courant && courant->valeur < valeur)
+    while (courant && tolower(courant->valeur) < tolower(valeur))
     {
         prec = &(courant->frere);
         courant = courant->frere;
@@ -130,18 +152,20 @@ noeud_t ** recherche_prec_Arbre(noeud_t ** rac, char * mot, int * i)
 {
     pile_t * pile = initialiser_Pile(MAX);
     noeud_t ** prec=rac; noeud_t * cour = *rac;
-    int traitement_fini = 0, i = 0;
+    int traitement_fini = 0;
+    *i = 0;
 
-    while(!traitement_fini )
+    while(!traitement_fini)
     {
-        prec = recherche_prec_triee(prec, mot[i]);
-        if(*prec && (*prec)->valeur == mot[i])
+        prec = recherche_prec_triee(prec, mot[*i]);
+        cour = *prec;
+        if(*prec && (*prec)->valeur == mot[*i])
         {
-            if(mot[i+1] == '\0')
+            if(mot[(*i)+1] == '\0')
                 traitement_fini = 1;
             prec = &cour->fils;
             cour = *prec;
-            ++i;
+            (*i)++;
             
         }else
         {
@@ -155,15 +179,10 @@ noeud_t ** recherche_prec_Arbre(noeud_t ** rac, char * mot, int * i)
     return prec;
 }
 
-/*void inserer_lettre()
-{
-
-}*/
-
-void inserer_mot(noeud_t ** racine, char * mot,int * code_retour){
+/*void inserer_mot(noeud_t ** racine, char * mot,int * code_retour){
     int i = 0;
     noeud_t ** prec = recherche_prec_Arbre(racine, mot, &i);
     //Boucle pour insérer les lettres restantes.
-}
+}*/
 
  

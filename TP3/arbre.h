@@ -16,5 +16,5 @@ void supprimer_noeud(noeud_t **);
 noeud_t * creer_Arbre(char *);
 void disp_Mots(noeud_t *);
 noeud_t ** recherche_prec_triee(noeud_t ** tete, char valeur);
-noeud_t ** recherche_prec_Arbre(noeud_t ** rac, char * mot);
+noeud_t ** recherche_prec_Arbre(noeud_t ** rac, char * mot, int *);
 #endif
