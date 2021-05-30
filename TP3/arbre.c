@@ -170,19 +170,48 @@ noeud_t ** recherche_prec_Arbre(noeud_t ** rac, char * mot, int * i)
         }else
         {
             traitement_fini = 1;
-        }
-        
-        
+        }     
     }
-
     liberer_Pile(&pile);
     return prec;
 }
 
-/*void inserer_mot(noeud_t ** racine, char * mot,int * code_retour){
+noeud_t * creerNoeud(char valeur) {
+	noeud_t * noeud = (noeud_t *) malloc(sizeof(noeud_t));
+	noeud->valeur = valeur;
+	noeud->frere = NULL;
+	noeud->fils = NULL;
+	return noeud;
+}
+
+void inserer_Lettre(noeud_t ** prec, char valeur)
+{
+    noeud_t * noeud = creerNoeud(valeur);
+    if(noeud)
+    {
+        noeud->frere = *prec;
+        *prec = noeud;
+    }
+
+}
+
+void inserer_mot(noeud_t ** racine, char * mot,int * code_retour){
+
     int i = 0;
+
     noeud_t ** prec = recherche_prec_Arbre(racine, mot, &i);
-    //Boucle pour insérer les lettres restantes.
-}*/
+    noeud_t *  cour = *prec;
+
+    while(mot[i] != '\0')
+    {
+        prec = recherche_prec_triee(prec, mot[i]);
+        inserer_Lettre(prec, mot[i]);
+        cour = *prec;
+        prec = &((*prec)->fils);
+        ++i;
+    }
+
+    //printf("%c",cour->valeur);
+}
 
  
