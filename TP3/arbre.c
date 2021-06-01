@@ -3,6 +3,13 @@
 #include <string.h>
 #include <ctype.h>
 
+/* -------------------------------------------------------------------- */
+/* alloc_noeud: Crée un noeud et le renvoie                             */
+/*                                                                      */
+/* En entrée: la valeur du noeud, les adresses fils et frere            */
+/*                                                                      */
+/* En sortie: pointeur sur le noeud                                     */
+/* -------------------------------------------------------------------- */
 noeud_t * alloc_noeud(char valeur,noeud_t * fils, noeud_t * frere)
 {
     noeud_t * element = (noeud_t *) malloc(sizeof(noeud_t));
@@ -16,6 +23,13 @@ noeud_t * alloc_noeud(char valeur,noeud_t * fils, noeud_t * frere)
     return element;   
 }
 
+/* -------------------------------------------------------------------- */
+/* liberer_Arbre: Libere la mémoire allouée à l'arbre                   */
+/*                                                                      */
+/* En entrée: adresse pointeur sur la racine de l'arbre                 */
+/*                                                                      */
+/* En sortie: void                                                      */
+/* -------------------------------------------------------------------- */
 void liberer_Arbre(noeud_t ** racine)
 {
     pile_t * pile = initialiser_Pile(MAX);
@@ -45,13 +59,13 @@ void liberer_Arbre(noeud_t ** racine)
 
 }
 
-void supprimer_noeud(noeud_t ** prec)
-{
-    noeud_t * temp = *prec;
-    *prec=(*prec)->frere;
-    free(temp);
-}
-
+/* -------------------------------------------------------------------- */
+/* creer_Arbre: Créee l'abre à partir de l'exp algèbrique               */
+/*                                                                      */
+/* En entrée: la chaîne de l'exp algèbrique                             */
+/*                                                                      */
+/* En sortie: pointeur sur le noeud racine                              */
+/* -------------------------------------------------------------------- */
 noeud_t * creer_Arbre(char * string)
 {
     pile_t * pile = initialiser_Pile(MAX);
@@ -99,7 +113,13 @@ noeud_t * creer_Arbre(char * string)
 }
 
 
-
+/* -------------------------------------------------------------------- */
+/* disp_Mots: Affiche les mots de l'arbre dans l'ordre alpha            */
+/*                                                                      */
+/* En entrée: le noeud racine de l'arbre, un préfixe à afficher         */
+/*                                                                      */
+/* En sortie: void                                                      */
+/* -------------------------------------------------------------------- */
 void disp_Mots(noeud_t * racine, char * motif)
 {
     pile_t * pile = initialiser_Pile(MAX);
@@ -137,6 +157,13 @@ void disp_Mots(noeud_t * racine, char * motif)
     liberer_Pile(&pile);
 }
 
+/* -------------------------------------------------------------------- */
+/* recherche_prec_triee: Renvoie le prec où placer l'élement            */
+/*                                                                      */
+/* En entrée: le noeud "tête", la valeur recherchée                     */
+/*                                                                      */
+/* En sortie: Double pointeur sur un noeud                              */
+/* -------------------------------------------------------------------- */
 noeud_t ** recherche_prec_triee(noeud_t ** tete, char valeur)
 {
     noeud_t ** prec = tete;
@@ -149,6 +176,13 @@ noeud_t ** recherche_prec_triee(noeud_t ** tete, char valeur)
     return(prec);
 }
 
+/* -------------------------------------------------------------------- */
+/* recherche_prec_Arbre:Renvoie le prec où placer l'élement dans l'arbre*/
+/*                                                                      */
+/* En entrée: le noeud racine, la valeur recherchée , l'indice du mot   */
+/*                                                                      */
+/* En sortie: Double pointeur sur un noeud                              */
+/* -------------------------------------------------------------------- */
 noeud_t ** recherche_prec_Arbre(noeud_t ** rac, char * mot, int * i)
 {
     pile_t * pile = initialiser_Pile(MAX);
@@ -177,17 +211,16 @@ noeud_t ** recherche_prec_Arbre(noeud_t ** rac, char * mot, int * i)
     return prec;
 }
 
-noeud_t * creerNoeud(char valeur) {
-	noeud_t * noeud = (noeud_t *) malloc(sizeof(noeud_t));
-	noeud->valeur = valeur;
-	noeud->frere = NULL;
-	noeud->fils = NULL;
-	return noeud;
-}
-
+/* -------------------------------------------------------------------- */
+/* inserer_Lettre :Insérer une lettre dans l'arbre dans prec            */
+/*                                                                      */
+/* En entrée: le noeud prec, la lettre à insérer                        */
+/*                                                                      */
+/* En sortie: void                                                      */
+/* -------------------------------------------------------------------- */
 void inserer_Lettre(noeud_t ** prec, char valeur)
 {
-    noeud_t * noeud = creerNoeud(valeur);
+    noeud_t * noeud = alloc_noeud(valeur, NULL, NULL);
     if(noeud)
     {
         noeud->frere = *prec;
@@ -196,6 +229,14 @@ void inserer_Lettre(noeud_t ** prec, char valeur)
 
 }
 
+
+/* -------------------------------------------------------------------- */
+/* inserer_Mot :Insérer un mot dans l'arbre dans prec                   */
+/*                                                                      */
+/* En entrée: le noeud prec, le mot à insérer                           */
+/*                                                                      */
+/* En sortie: void                                                      */
+/* -------------------------------------------------------------------- */
 void inserer_mot(noeud_t ** racine, char * mot){
 
     int i = 0;
@@ -215,6 +256,13 @@ void inserer_mot(noeud_t ** racine, char * mot){
     cour->valeur = toupper(cour->valeur);
 }
 
+/* -------------------------------------------------------------------- */
+/* disp_motif :Afficher mot commencant par motif                        */
+/*                                                                      */
+/* En entrée: le noeud racine, le motif                                 */
+/*                                                                      */
+/* En sortie: void                                                      */
+/* -------------------------------------------------------------------- */
 void disp_motif(noeud_t ** racine, char * motif)
 {
     int i = 0;
