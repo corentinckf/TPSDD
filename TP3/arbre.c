@@ -19,29 +19,28 @@ noeud_t * alloc_noeud(char valeur,noeud_t * fils, noeud_t * frere)
 void liberer_Arbre(noeud_t ** racine)
 {
     pile_t * pile = initialiser_Pile(MAX);
-    noeud_t ** prec = racine;
-    noeud_t * cour = *racine;
-    int etat = 0;
+    noeud_t * cour = *racine, * prec;
+    int etat = 0, termine = 0;
 
-    while(cour || !estVide(pile))
+    while(!termine)
     {
         while(cour)
         {
-            empiler(pile, cour);
+            empiler(pile, cour);  
             cour = cour->fils;
         }
-        while(cour == NULL && !estVide(pile))
+            
+        if(!estVide(pile))
         {
-            depiler(pile,&cour,&etat);
-        }
-        if(cour)
-        {
-            prec = &cour;
+            depiler(pile, &cour, &etat);
+            prec = cour;
             cour = cour->frere;
             free(prec);
+        }else{
+            termine = 1;
         }
+        
     }
-
     liberer_Pile(&pile);
 
 }
@@ -101,7 +100,7 @@ noeud_t * creer_Arbre(char * string)
 
 
 
-void disp_Mots(noeud_t * racine)
+void disp_Mots(noeud_t * racine, char * motif)
 {
     pile_t * pile = initialiser_Pile(MAX);
     noeud_t * cour = racine, * copie[MAX];
@@ -109,6 +108,7 @@ void disp_Mots(noeud_t * racine)
 
     while(cour || ! estVide(pile))
     {
+        
         while(cour)
         {
             empiler(pile, cour);
@@ -121,6 +121,7 @@ void disp_Mots(noeud_t * racine)
                 
                 //On l'affiche
                     //Faire une fonction
+                printf("%s", motif);
                 for(int i = 0; i < pile->sommet + 1;++i)
                     printf("%c", tolower(copie[i]->valeur)); 
                 printf("\n");
@@ -159,7 +160,7 @@ noeud_t ** recherche_prec_Arbre(noeud_t ** rac, char * mot, int * i)
     {
         prec = recherche_prec_triee(prec, mot[*i]);
         cour = *prec;
-        if(*prec && (*prec)->valeur == mot[*i])
+        if(*prec && tolower((*prec)->valeur) == tolower(mot[*i]))
         {
             if(mot[(*i)+1] == '\0')
                 traitement_fini = 1;
@@ -195,7 +196,7 @@ void inserer_Lettre(noeud_t ** prec, char valeur)
 
 }
 
-void inserer_mot(noeud_t ** racine, char * mot,int * code_retour){
+void inserer_mot(noeud_t ** racine, char * mot){
 
     int i = 0;
 
@@ -207,11 +208,22 @@ void inserer_mot(noeud_t ** racine, char * mot,int * code_retour){
         prec = recherche_prec_triee(prec, mot[i]);
         inserer_Lettre(prec, mot[i]);
         cour = *prec;
-        prec = &((*prec)->fils);
+        prec = &cour->fils;      
         ++i;
     }
 
-    //printf("%c",cour->valeur);
+    cour->valeur = toupper(cour->valeur);
+}
+
+void disp_motif(noeud_t ** racine, char * motif)
+{
+    int i = 0;
+    noeud_t ** prec = recherche_prec_Arbre(racine, motif, &i);
+    int longueur_motif = (int) strlen(motif);
+
+    if(i==longueur_motif)
+        disp_Mots(*prec, motif);
+
 }
 
  
